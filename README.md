@@ -1,5 +1,5 @@
-
-# KPK_Multik  
+# KPK_Multik![встреча](https://user-images.githubusercontent.com/82305409/114626785-dd913d80-9cbc-11eb-80dd-1bbb93519b8d.PNG)
+  
 <h1 p align="center"> 
 Мультфильм "Лето" 
     <h/>
