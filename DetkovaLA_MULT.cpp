@@ -1,3 +1,9 @@
+
+//-----------------------------------------------------------------------------
+// Multfilm "LETO"
+// Autor: Detkova Lumila
+//-----------------------------------------------------------------------------
+
 #include "TXLib.h"
 
 void DrawHowse          (int x, int y, double sizex, double sizey, COLORREF stenaColor,COLORREF kryshaColor,
@@ -14,20 +20,26 @@ void DrawBoy            (int x, int y, double sizex, double sizey, COLORREF head
 
 void DrawFlower         (int x, int y, double sizex, double sizey, COLORREF lepestkiColor,COLORREF serdcevinaColor,
                         int list, int naklon);
+
 void DrawGrib           (int x, int y, double sizex, double sizey, COLORREF shlypkaColor,COLORREF nogkaColor);
 void DrawTree           (int x, int y, double sizex, double sizey, COLORREF treeColor, int wind);
 void DrawRain           (int x, int y, double sizex, double sizey, COLORREF cloudColor, int luzha, int rain);
 void StartTitles        ();
 void EndTitles          ();
-void DrawBackGround     (int wind, int rays);
+void DrawBackGround     (int wind, int rays, double size);
 void DrawBackGroundRain (int wind);
+void Polyana            (int wind);
 void SunDay             ();
 void Meeting            ();
 void Greeting           ();
 void Walk               ();
+void WalkFlower         ();
+void WalkGrib           ();
 void RainDay            ();
-void GirlGoHome         ();
-void BoyGoHome          ();
+void GoHomeisLesa       ();
+void GoHome             ();
+
+//-----------------------------------------------------------------------------
 
 int main ()
 {
@@ -42,70 +54,84 @@ int main ()
 
     return 0;
 }
+
+ //-----------------------------------------------------------------------------
+
  void StartTitles()
  {
     int step = 0;
     while (step >= -40)
        {
-        printf( "", step );
+        printf("");
 
         txClear();
 
         txSetFillColor (TX_YELLOW);
         txRectangle    (0, 0, 1024, 648);
         txSetColor     (TX_LIGHTBLUE);
-        txSelectFont   ("Arial",300);
-        txTextOut      (500+step*10, 50, "Летo");
+
+        txSelectFont   ("Arial", 300);
+        txTextOut      (500 + step*10, 50, "Летo");
 
         for (int t = 1; t <= 6; t++)
-        DrawFlower (150*t,  430, 3, 3, TX_LIGHTRED, TX_WHITE, abs(step)%11-5, abs(step)%10-5);
+        DrawFlower (150*t, 430, 3, 3, TX_LIGHTRED, TX_WHITE, abs(step)%11 - 5, abs(step)%10 - 5);
 
         txSleep (100);
 
         step--;
 
         }
-
  }
+
+ //-----------------------------------------------------------------------------
+
  void EndTitles()
  {
         txSetFillColor (TX_YELLOW);
         txRectangle    (0, 0, 1024, 648);
         txSetColor     (TX_LIGHTBLUE);
+
         txSelectFont   ("Arial", 100);
         txTextOut      (150, 50,"Спасибо за внимание!");
         txSelectFont   ("Arial", 50);
         txTextOut      (10, 200, "Автор: Деткова Людмила Анатольевна, г. Одинцово МО");
 
         for (int t = 1; t <= 6; t++)
-        DrawFlower (150*t,  430, 3, 3, TX_LIGHTRED, TX_WHITE, 0, 0);
+        DrawFlower (150*t, 430, 3, 3, TX_LIGHTRED, TX_WHITE, 0, 0);
 
         txSleep (50);
 }
- void DrawBackGround(int wind, int rays)
+
+//-----------------------------------------------------------------------------
+
+ void DrawBackGround(int wind, int rays, double size)
  {
     txSetFillColor (TX_WHITE);
     txRectangle    (0,   0, 1024, 648);
     txSetFillColor (TX_LIGHTGREEN);
     txRectangle    (0, 400, 1024, 648);
 
-    DrawSun   (850,  100, 1, 1, TX_YELLOW, rays );
-    DrawCloud ( 50,  150, 1, 1, TX_LIGHTCYAN);
-    DrawCloud (300,   50, 1, 1, TX_LIGHTCYAN);
-    DrawCloud (550,  200, 1, 1, TX_LIGHTCYAN);
+    DrawSun   (850, 100, 1, 1, TX_YELLOW, rays );
+    DrawCloud ( 50, 150, size, size, TX_LIGHTCYAN);
+    DrawCloud (300,  50, size, size, TX_LIGHTCYAN);
+    DrawCloud (550, 200, size, size, TX_LIGHTCYAN);
 
     for (int step = 0; step <= 5; step++)
     {
-        DrawGrib ( 10 + 300*step,  400, 1    , 1   , TX_ORANGE   , TX_YELLOW);
-        DrawGrib (110 + 300*step,  400, 0.75 , 0.5 , TX_RED      , TX_WHITE);
-        DrawGrib (210 + 300*step,  400, 0.5  , 1   , TX_LIGHTRED , TX_YELLOW);
+        DrawGrib ( 10 + 300*step, 400, 1   , 1  , TX_ORANGE  , TX_YELLOW);
+        DrawGrib (110 + 300*step, 400, 0.75, 0.5, TX_RED     , TX_WHITE);
+        DrawGrib (210 + 300*step, 400, 0.5 , 1  , TX_LIGHTRED, TX_YELLOW);
     }
+
     for (int step = 0; step <= 6; step++)
     {
-        DrawTree ( 50 + 200*step,  250, 1   , 1   , TX_GREEN     ,  wind%10 );
-        DrawTree (150 + 200*step,  300, 0.75, 0.75, TX_LIGHTGREEN, -wind%10 );
+        DrawTree ( 50 + 200*step, 250, 1   , 1   , TX_GREEN     ,  wind%10);
+        DrawTree (150 + 200*step, 300, 0.75, 0.75, TX_LIGHTGREEN, -wind%10);
     }
 }
+
+//-----------------------------------------------------------------------------
+
 void DrawBackGroundRain(int wind)
 {
     txSetFillColor (TX_GREY);
@@ -115,129 +141,216 @@ void DrawBackGroundRain(int wind)
 
     for (int step = 0; step <= 6; step++)
     {
-        DrawTree ( 50 + 200*step,  250, 1   , 1   , TX_GREEN     , wind );
-        DrawTree (150 + 200*step,  300, 0.75, 0.75, TX_LIGHTGREEN, wind );
+        DrawTree ( 50 + 200*step, 250, 1   , 1   , TX_GREEN     , wind);
+        DrawTree (150 + 200*step, 300, 0.75, 0.75, TX_LIGHTGREEN, wind);
     }
     for (int step = 0; step <= 5; step++)
     {
-        DrawGrib ( 10 + 300*step,  400, 1    , 1   , TX_ORANGE   , TX_YELLOW);
-        DrawGrib (110 + 300*step,  400, 0.75 , 0.5 , TX_RED      , TX_WHITE);
-        DrawGrib (210 + 300*step,  400, 0.5  , 1   , TX_LIGHTRED , TX_YELLOW);
+        DrawGrib ( 10 + 300*step, 400, 1   , 1  , TX_ORANGE  , TX_YELLOW);
+        DrawGrib (110 + 300*step, 400, 0.75, 0.5, TX_RED     , TX_WHITE);
+        DrawGrib (210 + 300*step, 400, 0.5 , 1  , TX_LIGHTRED, TX_YELLOW);
     }
 }
+
+//-----------------------------------------------------------------------------
+
  void SunDay ()
 {
     Meeting ();
     Greeting ();
     Walk ();
+    WalkFlower ();
+    WalkGrib ();
 }
+
+//-----------------------------------------------------------------------------
+
 void Meeting ()
 {
     int step = 200;
     while (step <= 300)
     {
         txClear ();
-        DrawBackGround (step, step%10);
-        DrawHowse (  50,        150,           1, 1, TX_ORANGE, TX_RED  ,        0,       0,      0 , 0);
-        DrawGirl  ( 200 + step, 480 - step%10, 1, 1, TX_WHITE , TX_PINK ,  step%10, step%10, step%2 , 0,  5);
-        DrawBoy   (1000 - step, 480,           1, 1, TX_WHITE , TX_BLACK,  step%10, step%10, step%20, 0,  0);
+        DrawBackGround (step, step%10, (step/20)%2 + 0.5);
+
+        DrawHowse (  0, 150, 1,   1,   TX_ORANGE, TX_RED  , 0, 0, 0, 0);
+        DrawHowse (800,  80, 1.2, 1.2, TX_RED,    TX_BLUE , 0, 0, 0, 0);
+
+        DrawGirl (150 + step, 480 - step%10, 1, 1, TX_WHITE, TX_PINK , step%10, step%10, step%2 , 0, 5);
+        DrawBoy  (950 - step, 480,           1, 1, TX_WHITE, TX_BLACK, step%10, step%10, step%20, 0, 0);
 
         step++;
 
         txSleep (20);
     }
 }
+
+//-----------------------------------------------------------------------------
+
 void Greeting ()
 {
     int step = 10;
     while ( step <= 30 )
     {
         txClear ();
-        DrawBackGround (0, step%10);
-        DrawHowse ( 50, 150, 1, 1, TX_ORANGE, TX_RED  ,          0,          0, 0, 0);
-        DrawGirl  (500, 480, 1, 1, TX_WHITE , TX_PINK , -step%2*50,          0, 0, 0, 5);
-        DrawBoy   (700, 480, 1, 1, TX_WHITE , TX_BLACK,          0, -step%2*50, 0, 0, 0);
+        DrawBackGround (0, step%10, (step/10)%2 + 0.5);
+
+        DrawHowse (  0, 150, 1,   1,   TX_ORANGE, TX_RED , 0, 0, 0, 0);
+        DrawHowse (800,  80, 1.2, 1.2, TX_RED,    TX_BLUE, 0, 0, 0, 0);
+
+        DrawGirl (450, 480, 1, 1, TX_WHITE, TX_PINK , -step%2*50,          0, 0, 0, 5);
+        DrawBoy  (600, 480, 1, 1, TX_WHITE, TX_BLACK,          0, -step%2*50, 0, 0, 0);
 
         step++;
 
         txSleep (70);
     }
 }
+
+//-----------------------------------------------------------------------------
+
 void Walk ()
 {
     int step = 50;
     while ( step <= 150 )
     {
         txClear ();
-        DrawBackGround (0, step%10);
+        DrawBackGround (0, step%10, (step/20)%2 + 0.5);
 
+        Polyana(step);
 
-        for (int t = 0; t <= 5; t++)
-        {
-            DrawGrib ( 10 + 300*t,  400, 1    , 1   , TX_ORANGE   , TX_YELLOW);
-            DrawGrib (110 + 300*t,  400, 0.75 , 0.5 , TX_RED      , TX_WHITE );
-            DrawGrib (210 + 300*t,  400, 0.5  , 1   , TX_LIGHTRED , TX_YELLOW);
-        }
-
-        for (int t = 0; t <= 10; t++)
-        {
-            DrawFlower ( 10 + 100*t,  480 + t%3*100, 1    , 1    , TX_WHITE   , TX_YELLOW, step%11-5, step%10-5);
-            DrawFlower (160 + 100*t,  530 + t%3*100, 0.75 , 0.75 , TX_BLUE    , TX_WHITE , step%11-5, step%10-5);
-            DrawFlower (300 + 100*t,  580 + t%3*100, 1.2  , 1.2  , TX_LIGHTRED, TX_YELLOW, step%11-5, step%10-5);
-        }
-
-        DrawGirl (500 + step,  480 + step, 1  , 1  , TX_WHITE  , TX_PINK ,  0,  0, step%10, 0,  5);
-        DrawBoy  (700 + step,  480 - step, 1  , 1  , TX_WHITE  , TX_BLACK,  0,  0, step%10, 0,  0);
+        DrawGirl (450 + step/2, 480 + step/2, 1, 1, TX_WHITE, TX_PINK , 0, 0, step%10, 0,  5);
+        DrawBoy  (600 + step/2, 480 + step/2, 1, 1, TX_WHITE, TX_BLACK, 0, 0, step%10, 0,  3);
 
         step++;
         txSleep (30);
     }
 }
+ void Polyana (int wind)
+ {
+    for (int t = 0; t <= 5; t++)
+        {
+        DrawGrib ( 10 + 300*t, 400, 1   , 1  , TX_ORANGE  , TX_YELLOW);
+        DrawGrib (110 + 300*t, 400, 0.75, 0.5, TX_RED     , TX_WHITE );
+        DrawGrib (210 + 300*t, 400, 0.5 , 1  , TX_LIGHTRED, TX_YELLOW);
+        }
+
+    for (int t = 0; t <= 10; t++)
+        {
+        DrawFlower ( 10 + 100*t, 480 + t%3*100, 1   , 1   , TX_WHITE   , TX_YELLOW, wind%11 - 5, wind%10 - 5);
+        DrawFlower (160 + 100*t, 530 + t%3*100, 0.75, 0.75, TX_BLUE    , TX_WHITE , wind%11 - 5, wind%10 - 5);
+        DrawFlower (300 + 100*t, 580 + t%3*100, 1.2 , 1.2 , TX_LIGHTRED, TX_YELLOW, wind%11 - 5, wind%10 - 5);
+        }
+}
+//-----------------------------------------------------------------------------
+
+void WalkFlower ()
+{
+    int step = 50;
+    while ( step <= 150 )
+    {
+        txClear ();
+        DrawBackGround (0, step%10, (step/20)%2 + 0.5);
+
+        Polyana(step);
+
+        DrawGirl   (525 - step/2, 555 - step, 1  , 1  , TX_WHITE  ,  TX_PINK ,  0,  0, step%10, 0, 5);
+        DrawFlower (485 - step/2, 555 - step, 1.2, 1.2, TX_LIGHTRED, TX_YELLOW, 0,  0);
+        DrawBoy    (675 - step/2, 555 - step, 1  , 1  , TX_WHITE  ,  TX_BLACK,  0,  0, step%10, 0, 0);
+
+        step++;
+        txSleep (30);
+    }
+}
+
+//-----------------------------------------------------------------------------
+
+void WalkGrib ()
+{
+    int step = 50;
+    while ( step <= 150 )
+    {
+        txClear ();
+        DrawBackGround (0, step%10,(step/20)%2 + 0.5);
+
+        Polyana(step);
+
+        DrawGirl   (450 + step/2, 405 - step/2, 1  , 1  , TX_WHITE  ,  TX_PINK ,  0,  0, step%10, 0, 5);
+        DrawFlower (410 + step/2, 405 - step/2, 1.2, 1.2, TX_LIGHTRED, TX_YELLOW, 0,  0);
+        DrawBoy    (600 + step/2, 405 - step/2, 1  , 1  , TX_WHITE  ,  TX_BLACK,  0,  0, step%10, 0, 0);
+
+        step++;
+        txSleep (30);
+    }
+
+    DrawGirl   (525, 330, 1,   1  , TX_WHITE  ,  TX_PINK ,  0, 0, 0, 0, 5);
+    DrawFlower (485, 330, 1.2, 1.2, TX_LIGHTRED, TX_YELLOW, 0, 0);
+    DrawBoy    (675, 330, 1,   1  , TX_WHITE  ,  TX_BLACK,  0, 0, 0, 0, 0);
+    DrawGrib   (720, 360, 1,   1  , TX_ORANGE ,  TX_YELLOW);
+
+    txSleep (1000);
+}
+
+//-----------------------------------------------------------------------------
+
 void RainDay ()
 {
-    GirlGoHome ();
-    BoyGoHome ();
+    GoHomeisLesa ();
+    GoHome ();
 }
- void GirlGoHome ()
+
+//-----------------------------------------------------------------------------
+
+ void GoHomeisLesa ()
  {
-    int step = 350;
-    while ( step <= 500)
+    int step = 50;
+    while ( step <= 150)
     {
         txClear ();
         DrawBackGroundRain (step%20-10);
 
-        DrawRain (step,       100, 2, 2, TX_BLUE, 0, step%10);
-        DrawRain (step + 350, 100, 2, 2, TX_BLUE, 0, step%10);
-        DrawRain (step + 700, 100, 2, 2, TX_BLUE, 0, step%10);
+        Polyana(step);
 
-        DrawGirl   (780 - step,  450, 1  , 1  , TX_WHITE   , TX_PINK  ,       0,       0, step%10,      0,  0);
-        DrawFlower (740 - step,  450, 1.2, 1.2, TX_LIGHTRED, TX_YELLOW, 0,   0);
-        DrawHowse  ( 50,          60, 1.2, 1.2, TX_ORANGE  , TX_RED   , step%10, step%10, step%10, step%10);
+        DrawGirl   (525 + step, 330 + step/2, 1,   1  , TX_WHITE  ,  TX_PINK ,  0, 0, step%10, 0, 0);
+        DrawFlower (485 + step, 330 + step/2, 1.2, 1.2, TX_LIGHTRED, TX_YELLOW, 0, 0);
+        DrawBoy    (675 + step, 330 + step/2, 1,   1  , TX_WHITE  ,  TX_BLACK,  0, 0, step%10, 0, 0);
+        DrawGrib   (720 + step, 360 + step/2, 1.2, 1.2, TX_ORANGE ,  TX_YELLOW);
 
         step++;
         txSleep (20);
     }
  }
- void BoyGoHome ()
+
+ //-----------------------------------------------------------------------------
+
+ void GoHome ()
  {
     int step = 350;
     while ( step <= 500 )
     {
         txClear ();
-        DrawBackGroundRain (step%20-10);
+        DrawBackGroundRain (step%20 - 10);
 
         DrawRain (step,       100, 2, 2, TX_BLUE, step, step%10);
         DrawRain (step + 350, 100, 2, 2, TX_BLUE, step, step%10);
         DrawRain (step + 700, 100, 2, 2, TX_BLUE, step, step%10);
 
-        DrawBoy   (880 - step,  450, 1  , 1  , TX_WHITE  , TX_BLACK,      -100,      20, step%10,       0,  0);
-        DrawGrib  (750 - step,  420, 3  , 3  , TX_ORANGE , TX_YELLOW);
-        DrawHowse ( 50,          60, 1.2, 1.2, TX_ORANGE , TX_RED    , step%10, step%10, step%10, step%10);
+        DrawGirl   (780 - step, 450, 1,   1  , TX_WHITE  ,  TX_PINK ,     0,  0, step%10, 0, 0);
+        DrawFlower (740 - step, 450, 1.2, 1.2, TX_LIGHTRED, TX_YELLOW,    0,  0);
+        DrawBoy    (880 - step, 450, 1  , 1  , TX_WHITE  ,  TX_BLACK,  -100, 20, step%10, 0, 0);
+        DrawGrib   (750 - step, 420, 3  , 3  , TX_ORANGE ,  TX_YELLOW);
+
+
+        DrawHowse (   0, 150, 1,   1,   TX_ORANGE, TX_RED,  step%10, step%10, step%10, step%10);
+        DrawHowse ( 800,  80, 1.2, 1.2, TX_RED,    TX_BLUE, step%10, step%10, step%10, step%10);
 
         step++;
         txSleep (20);
     }
  }
+
+ //-----------------------------------------------------------------------------
+
  void DrawHowse(int x, int y, double sizex, double sizey, COLORREF stenaColor,COLORREF kryshaColor,
                 double krysha, double okno,double truba, double dym)
 {
@@ -249,7 +362,7 @@ void RainDay ()
     txSetFillColor (TX_WHITE);
     txRectangle    (x + (100 - 50)*sizex + okno, y + (400 - 150)*sizey, x + (200 - 50)*sizex + okno, y + (500 - 150)*sizey);
 
-    txSetColor     (stenaColor,3);
+    txSetColor     (stenaColor, 3);
     txSetFillColor (stenaColor);
     txLine         (x +(150 - 50)*sizex + okno, y + (400 - 150)*sizey, x + (150 - 50)*sizex + okno, y + (500 - 150)*sizey);
     txLine         (x +(100 - 50)*sizex + okno, y + (450 - 150)*sizey, x + (200 - 50)*sizex + okno, y + (450 - 150)*sizey);
@@ -276,6 +389,8 @@ void RainDay ()
     txPolygon      (triangleHouse,3);
 }
 
+ //-----------------------------------------------------------------------------
+
 void DrawCloud (int x, int y, double sizex, double sizey, COLORREF cloudColor)
 {
     txSetColor     (cloudColor);
@@ -285,6 +400,9 @@ void DrawCloud (int x, int y, double sizex, double sizey, COLORREF cloudColor)
     txCircle (x + (190 - 150)*sizex, y + (100 - 100)*sizey, 40*sizex);
     txCircle (x + (230 - 150)*sizex, y + (100 - 100)*sizey, 40*sizex);
 }
+
+//-----------------------------------------------------------------------------
+
 void DrawRain (int x, int y, double sizex, double sizey, COLORREF cloudColor, int luzha, int rain)
 {
     txSetColor     (cloudColor,3);
@@ -303,11 +421,14 @@ void DrawRain (int x, int y, double sizex, double sizey, COLORREF cloudColor, in
     }
     if (luzha > 0)
     {
-        txEllipse (380, 450, 400 + luzha ,480 );
-        txEllipse (280, 550, 300 + luzha ,580 );
-        txEllipse (580, 500, 600 + luzha ,530 );
+        txEllipse (380, 450, 400 + luzha , 480);
+        txEllipse (280, 550, 300 + luzha , 580);
+        txEllipse (580, 500, 600 + luzha , 530);
     }
 }
+
+//-----------------------------------------------------------------------------
+
 void DrawSun (int x, int y, double sizex, double sizey, COLORREF sunColor, int rays)
 {
     txSetColor     (sunColor,3);
@@ -319,6 +440,8 @@ void DrawSun (int x, int y, double sizex, double sizey, COLORREF sunColor, int r
     txLine   (x + (780 - 850)*sizex - rays, y + ( 30 - 100)*sizey - rays, x + (920 - 850)*sizex + rays, y + (170 - 100)*sizey + rays);
     txLine   (x + (920 - 850)*sizex - rays, y + ( 30 - 100)*sizey - rays, x + (780 - 850)*sizex + rays, y + (170 - 100)*sizey + rays);
 }
+
+//-----------------------------------------------------------------------------
 
 void DrawGirl (int x, int y, double sizex, double sizey, COLORREF headColor,COLORREF torsoColor, double rhand, double lhand, double legs,double crazy,double smile)
 {
@@ -365,6 +488,8 @@ void DrawGirl (int x, int y, double sizex, double sizey, COLORREF headColor,COLO
     txLine         (x + (710 - 700)*sizex, y + (465 - 480)*sizey, x + (700 - 700)*sizex, y + (465 - 480)*sizey + smile);
 }
 
+ //-----------------------------------------------------------------------------
+
 void DrawBoy (int x, int y, double sizex, double sizey, COLORREF headColor,COLORREF torsoColor,double rhand, double lhand,double legs,double crazy, double smile)
 {
     txSetColor      (headColor, 3);
@@ -400,6 +525,9 @@ void DrawBoy (int x, int y, double sizex, double sizey, COLORREF headColor,COLOR
     txLine         (x + (510 - 500)*sizex, y + (465 - 480)*sizey - smile, x + (500 - 500)*sizex, y + (465 - 480)*sizey);
 
 }
+
+//-----------------------------------------------------------------------------
+
 void DrawFlower (int x, int y, double sizex, double sizey, COLORREF lepestkiColor,COLORREF serdcevinaColor, int list, int naklon)
 {
     txSetColor     (lepestkiColor);
@@ -423,19 +551,27 @@ void DrawFlower (int x, int y, double sizex, double sizey, COLORREF lepestkiColo
                              {x + (900 - 900)*sizex, y + (550 - 520)*sizey}};
     txPolygon      (triangleListok, 3);
 }
+
+//-----------------------------------------------------------------------------
+
 void DrawGrib (int x, int y, double sizex, double sizey, COLORREF shlypkaColor, COLORREF nogkaColor)
 {
     txSetColor      (shlypkaColor);
     txSetFillColor  (shlypkaColor);
     txPie           (x - 10*sizex, y - 50*sizey, x + 50*sizex, y, 0, 180);
+
     txSetColor      (nogkaColor);
     txSetFillColor  (nogkaColor);
     txPie           (x + 10*sizex, y - 50*sizey, x + 30*sizex, y, 180, 180);
 }
+
+//-----------------------------------------------------------------------------
+
 void DrawTree (int x, int y, double sizex, double sizey, COLORREF treeColor, int wind)
 {
     txSetColor              (treeColor, 3);
     txSetFillColor          (treeColor);
+
     POINT triangleTre[3]=  {{x - wind           , y - 50*sizey + wind}, {x - 50*sizex - wind, y + wind    },{x +  50*sizex, y - wind           }};
     txPolygon               (triangleTre, 3);
     POINT triangleTree[3]= {{x - 75*sizex - wind, y + 75*sizey + wind}, {x - wind           , y + wind    },{x +  75*sizex, y + 75*sizey - wind}};
