@@ -6,7 +6,9 @@
   <p>
 Это история о прогулке летним днем, и коварной погоде.
 </p>
-![Возвращение домой под дождем](https://user-images.githubusercontent.com/82305409/115124693-336f2980-9fcc-11eb-8153-f2fb9737d7f6.png)
+
+![Приветствие11](https://user-images.githubusercontent.com/82305409/115125196-328bc700-9fcf-11eb-8377-79b920184460.png)
+![Возвращение домой под дождем11](https://user-images.githubusercontent.com/82305409/115125268-92826d80-9fcf-11eb-862a-d2dca05d0c96.png)
 
 
 Этапы работы над мульфильмом:
