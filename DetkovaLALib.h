@@ -2,9 +2,13 @@
 //{============================================================================
 //!@mainpage
 //!
-//!@brief Библиотека героев
+//!@brief Библиотека героев мультфильма "ЛЕТО"</p>
 //!
-//!эта библиотека была создана в ...
+//!
+//!
+//!эта библиотека была создана в процессе изучения языка С++
+//!
+//!
 //!
 //!@par функции
 //!     - @ref DrawHowse()
@@ -18,7 +22,9 @@
 //!     - @ref DrawTree()
 //!     - @ref DrawKust()
 //!     - @ref DrawRain()
-//!@autor  Деткова Людмила Анатольевна, МО г. Одинцово
+//!
+//!
+//!@autor  Деткова Людмила Анатольевна, МО г. Одинцово </p>
 //!
 //!@date 2021
 //}============================================================================
@@ -56,6 +62,8 @@ void DrawRain           (int x, int y, double sizex, double sizey, COLORREF clou
 //!
 //! Рисуем Дом
 //!
+//!@image howse.PNG
+//!
 //!@param x                 x-координата верхнего левого угла стены дома
 //!@param y                 y-координата верхнего левого угла стены дома
 //!@param sizex             размер дома по оси Х
@@ -72,7 +80,7 @@ void DrawRain           (int x, int y, double sizex, double sizey, COLORREF clou
 //!@par Пример использования
 //!
 //!@code
-//!         DrawHowse (200, 400, 0.5, 0.5, RGB( 210, 105, 30), RGB( 139, 0,  139), RGB(0, 0, 0), 0, 0, 0, 0, 0);
+//!         DrawHowse (600, 400, 1, 1, RGB(255, 255, 224), RGB(139, 0, 0), RGB(0, 0, 0), 0, 0, 0, 0, 0);
 //!@endcode
 //!
 //}============================================================================
@@ -149,7 +157,7 @@ void DrawHowse(int x, int y, double sizex, double sizey, COLORREF stenaColor, CO
 //!@par Пример использования
 //!
 //!@code
-//!         DrawCloud (550, 200, 1, 1, TX_LIGHTCYAN);
+//!         DrawCloud ( 50, 150, 1, 1, TX_LIGHTCYAN);
 //!@endcode
 //!
 //}============================================================================
@@ -229,7 +237,7 @@ void DrawRain (int x, int y, double sizex, double sizey, COLORREF cloudColor, in
 //!@par Пример использования
 //!
 //!@code
-//!         DrawSun   (850, 355, 1, 1, TX_YELLOW, 0, 1, 1, 0, 1);
+//!         DrawSun   (850, 105, 1, 1, TX_YELLOW, 1, 1, 0, 1, 0);
 //!@endcode
 //!
 //}============================================================================
@@ -299,7 +307,7 @@ void DrawSun (int x, int y, double sizex, double sizey, COLORREF sunColor, int r
 //!@par Пример использования
 //!
 //!@code
-//!         DrawGirl (200, 200, 1, 1, RGB(221, 160, 221), RGB(218, 105, 30), RGB(255, 0, 255), 0, 0, 0, 0, 5, 1, 5, 5, 5, 1, 2);
+//!         DrawGirl  (300, 500, 1, 1, RGB(221, 160, 221), RGB(218, 105, 30), RGB(255, 0, 255), 0, 0, 0, 0, 5, 1, 1, 0, 0, 0, 0);
 //!@endcode
 //!
 //}============================================================================
@@ -336,7 +344,7 @@ void DrawGirl (int x, int y, double sizex, double sizey, COLORREF headColor, COL
 
     txSetColor     (TX_LIGHTCYAN , 3);
     txSetFillColor (TX_LIGHTCYAN);
-    txEllipse      (x + (680 - 700)*sizex, y + (445 - 480)*sizey*eyes + crazy, x + (690 - 700)*sizex, y + (450 - 480)*sizey*eyes + crazy);
+    txEllipse      (x + (680 - 700)*sizex, y + (445 - 480)*sizey*eyes + crazy, x + (690 - 700)*sizex, y + (455 - 480)*sizey*eyes + crazy);
     txEllipse      (x + (710 - 700)*sizex, y + (445 - 480)*sizey*eyes - crazy, x + (720 - 700)*sizex, y + (455 - 480)*sizey*eyes - crazy);
 
     txSetColor     (TX_BLUE, 3);
@@ -378,7 +386,7 @@ void DrawGirl (int x, int y, double sizex, double sizey, COLORREF headColor, COL
 //!@par Пример использования
 //!
 //!@code
-//!         DrawBoy (400, 400, 1, 1, RGB(221, 160, 221), RGB(218, 105, 30), RGB(0, 0, 255), 0, 0, 0, 0, 0, 1, 5, 5, 1, 2, 1);
+//!         DrawBoy   (500, 500, 1, 1, RGB(221, 160, 221), RGB(218, 105, 30), RGB(  0, 0, 255), 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1);
 //!@endcode
 //!
 //}============================================================================
@@ -444,7 +452,7 @@ void DrawBoy (int x, int y, double sizex, double sizey, COLORREF headColor, COLO
 //!@par Пример использования
 //!
 //!@code
-//!         DrawFlower (150, 430, 3, 3, TX_LIGHTRED, TX_WHITE, 5, 5);
+//!         DrawFlower (200,  550, 1, 1, RGB(255, 0, 0), RGB(255, 255, 255), 1, 1);
 //!@endcode
 //!
 //}============================================================================
@@ -487,7 +495,7 @@ void DrawFlower (int x, int y, double sizex, double sizey, COLORREF lepestkiColo
 //!@par Пример использования
 //!
 //!@code
-//!         DrawGrib (210, 400, 0.5, 1, TX_LIGHTRED, TX_YELLOW);
+//!         DrawGrib ( 30, 500, 1, 1, TX_ORANGE, TX_YELLOW);
 //!@endcode
 //!
 //}============================================================================
@@ -516,7 +524,7 @@ void DrawGrib (int x, int y, double sizex, double sizey, COLORREF shlypkaColor, 
 //!@par Пример использования
 //!
 //!@code
-//!         DrawTree ( 50, 250, 1, 1, TX_GREEN, 0);
+//!         DrawTree (280, 300, 1, 1, RGB(50, 205, 50), 0);
 //!@endcode
 //!
 //}============================================================================
@@ -546,7 +554,7 @@ void DrawTree (int x, int y, double sizex, double sizey, COLORREF treeColor, int
 //!@par Пример использования
 //!
 //!@code
-//!         DrawKust (50, 400, 0.5, 0.5);
+//!         DrawKust (120, 400, 1, 1);
 //!@endcode
 //!
 //}============================================================================
@@ -583,7 +591,7 @@ void DrawTree (int x, int y, double sizex, double sizey, COLORREF treeColor, int
 //!@par Пример использования
 //!
 //!@code
-//!         DrawCat (50, 600, 1, 1, RGB(255,165,0), RGB(0, 0, 255), 0, 0, 0, 0, 0, 1);
+//!         DrawCat   (100, 500, 3, 3, RGB(255, 69, 0), RGB(0, 0, 255), 1, 1, 1, 1, 1, 0);
 //!@endcode
 //!
 //}============================================================================
