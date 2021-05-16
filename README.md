@@ -9,9 +9,8 @@
 
 ![Стартовая страница](https://user-images.githubusercontent.com/82305409/118387553-bfa25a00-b627-11eb-852f-8545b3524214.PNG)
 ![Встреча1](https://user-images.githubusercontent.com/82305409/118387557-c5983b00-b627-11eb-9457-a8e98c758178.PNG)
-![Встреча](https://user-images.githubusercontent.com/82305409/118387560-c92bc200-b627-11eb-9115-b69f3f97e0c5.PNG)
+![Встреча](https://user-images.githubusercontent.com/82305409/118387560-c92bc200-b627-11eb-9115-b69f3f97e0c5.PNG)</p>
 
-![Приветствие11](https://user-images.githubusercontent.com/82305409/115125196-328bc700-9fcf-11eb-8377-79b920184460.png)</p>
 Этапы работы над мультфильмом:</p>
 1. Знакомство с языком С++ и библиотекой ТXLib.h </p> 
 2. Создание героев мультфильма: мальчик, девочка, солнце, облако, елочка, гриб, цветок, дом, дождь, кот.
